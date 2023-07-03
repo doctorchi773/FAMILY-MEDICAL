@@ -1,0 +1,32 @@
+Header set Cache-Control "max-age=31536000"
+Header set Expires "Thu, 31 Dec 2022 12:00:00 GMT"
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
+Canonical tag
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.(.)$ [NC]
+RewriteRule ^(.)$ https://%1/$1 [R=301,L]
+</IfModule>
+
+Robots.txt
+This file tells search engines which pages they should index and which pages they should not index.
+Sitemap.xml
+
+  do-not-include-insearch.html
+ 
+Header set Cache-Control "max-age=31536000": This line of code tells the browser to cache the static assets for one year.
+Header set Expires "Thu, 31 Dec 2022 12:00:00 GMT": This line of code tells the browser when the static assets expire.
+RewriteEngine On: This line of code tells the web server to enable the rewrite engine.
+RewriteCond %{HTTPS} off: This line of code tells the web server to only redirect requests that are not using https.
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]: This line of code tells the web server to redirect all requests to https:// followed by the domain name of your website and the requested URL.
+<IfModule mod_rewrite.c>: This line of code tells the web server to only run the following code if the mod_rewrite module is enabled.
+RewriteEngine On: This line of code tells the web server to enable the rewrite engine.
+RewriteCond %{HTTP_HOST} ^www.(.)$ [NC]: This line of code tells the web server to only redirect requests that contain the www subdomain.
+RewriteRule ^(.)$ https://%1/$1 [R=301,L]: This line of code tells the web server to redirect all requests to https:// followed by the domain name of your website without the www subdomain.
+Robots.txt: This file tells search engines which pages they should index and which pages they should not index.
+Sitemap.xml: This file tells search engines where to find all of the pages on your website.
+do-not-include-insearch.html: This file should not be indexed by search engines.
